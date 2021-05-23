@@ -1,0 +1,1 @@
+cp -r /root/shell-bot/sms.sh /bin/sms

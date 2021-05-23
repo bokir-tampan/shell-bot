@@ -1,0 +1,1 @@
+python3 /root/shell-bot/python-sms-activate-ru/example/simple_start.py
