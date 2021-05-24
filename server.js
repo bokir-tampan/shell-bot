@@ -195,6 +195,26 @@ bot.command("run", function (msg, reply, next) {
   });
 });
 
+bot.command("sms", function (msg, reply, next) {
+  var args = sms;
+  if (!args)
+    return reply.html("Используйте /run &lt;command&gt; выполнить что-то.");
+
+  if (msg.context.command) {
+    var command = msg.context.command;
+    return reply.text("Команда уже выполняется.");
+  }
+
+  if (msg.editor) msg.editor.detach();
+  msg.editor = null;
+
+  console.log("Чат «%s»: запущенная команда «%s»", msg.chat.name, args);
+  msg.context.command = new Command(reply, msg.context, args);
+  msg.context.command.on("exit", function() {
+    msg.context.command = null;
+  });
+});
+
 // Запуск редактора
 bot.command("file", function (msg, reply, next) {
   var args = msg.args();
